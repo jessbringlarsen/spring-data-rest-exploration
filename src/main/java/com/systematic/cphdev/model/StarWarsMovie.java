@@ -3,7 +3,6 @@ package com.systematic.cphdev.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -13,8 +12,6 @@ public class StarWarsMovie {
     private int id;
     private int year;
     private String title;
-
-
     private int rating;
 
     @ManyToMany
