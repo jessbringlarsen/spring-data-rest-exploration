@@ -23,7 +23,7 @@ public interface ClubJpaRepository extends JpaRepository<Club, Long> {
      * Exposes a endpoint on the search resource to query all clubs that have a specific postfix:
      * http://localhost:8080/api/clubs/search/nameEndingWith?postFix=BTK&page=1
      *
-     * Adding the {@Pageable} parameter gives the posibility to to paging and sorting:
+     * Adding the {@Pageable} parameter gives the posibility to do paging and sorting:
      * http://localhost:8080/api/clubs/search/nameEndingWith?postFix=BTK&size=10&page=1&sort=name,asc
      *
      * @param postFix of club names to query
