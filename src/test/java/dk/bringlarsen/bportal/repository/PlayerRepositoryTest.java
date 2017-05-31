@@ -52,4 +52,27 @@ public class PlayerRepositoryTest extends AbstractBaseRepositoryTest {
         assertThat(membership.getMemberTo(), is(MEMBER_TO));
         assertThat(membership.getPlayer(), is(player));
     }
+
+    @Test
+    public void testCustomFinderMethod() {
+        List<Player> result = playerJpaRepository.findByName("Jan");
+
+        assertThat(result.size(), is(1));
+        assertThat(result.get(0).getName(), is("Jan"));
+    }
+
+    @Test
+    public void testProxyFinderMethod() {
+        List<Player> result = playerJpaRepository.findByNameLikeAndVersionOrderByName("Jan", 1);
+
+        assertThat(result.size(), is(1));
+        assertThat(result.get(0).getName(), is("Jan"));
+    }
+
+    @Test
+    public void testOrderby() {
+        List<Player> result = playerJpaRepository.findAllOrderbyPlayerAndClub();
+
+        assertThat(result.size(), is(3));
+    }
 }

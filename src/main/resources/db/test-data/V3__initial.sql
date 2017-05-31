@@ -1,4 +1,11 @@
-INSERT INTO club (name) VALUES('BBC');
-INSERT INTO club (name) VALUES('Brønshøj');
-INSERT INTO club (name) VALUES('Hillerød BTK');
-INSERT INTO club (name) VALUES('Greve BTK');
+INSERT INTO club (id, name) VALUES(1, 'BBC');
+INSERT INTO club (id, name) VALUES(2, 'Brønshøj');
+INSERT INTO club (id, name) VALUES(3, 'Hillerød BTK');
+INSERT INTO club (id, name) VALUES(4, 'Greve BTK');
+
+INSERT INTO player (id, name, version) VALUES(1, 'Jan', 1);
+INSERT INTO player (id, name, version) VALUES(2, 'Samsonov', 1);
+
+INSERT INTO club_membership (club_id, player_id, member_from) VALUES(1, 1, CURRENT_DATE);
+INSERT INTO club_membership (club_id, player_id, member_from) VALUES(1, 2, CURRENT_DATE);
+INSERT INTO club_membership (club_id, player_id, member_from) VALUES(2, 2, CURRENT_DATE);

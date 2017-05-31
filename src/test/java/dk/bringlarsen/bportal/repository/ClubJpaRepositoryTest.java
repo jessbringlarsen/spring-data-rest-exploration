@@ -4,6 +4,9 @@ import dk.bringlarsen.bportal.model.Club;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
@@ -30,5 +33,12 @@ public class ClubJpaRepositoryTest extends AbstractBaseRepositoryTest {
     @Test
     public void testFindByNameEndingWith() {
         assertThat(clubJpaRepository.findByNameEndingWith("BTK", null).getTotalElements(), greaterThan(1L));
+    }
+
+    @Test
+    public void testCustomFinderMethod() throws SQLException {
+        List<Club> result = clubJpaRepository.findByName("BBC");
+
+        assertThat(result.get(0).getName(), is("BBC"));
     }
 }

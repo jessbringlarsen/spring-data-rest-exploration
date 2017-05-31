@@ -14,7 +14,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
  *
  */
 @RepositoryRestResource
-public interface ClubJpaRepository extends JpaRepository<Club, Long> {
+public interface ClubJpaRepository extends JpaRepository<Club, Long>, ClubJpaRepositoryCustom {
 
     @RestResource(path = "nameIsNotNull", rel = "nameIsNotNull")
     Page<Club> findByNameIsNotNull(Pageable page);
