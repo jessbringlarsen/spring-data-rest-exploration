@@ -4,7 +4,10 @@ import dk.bringlarsen.bportal.model.Club;
 import dk.bringlarsen.bportal.model.ClubMembership;
 import dk.bringlarsen.bportal.model.Player;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -71,8 +74,8 @@ public class PlayerRepositoryTest extends AbstractBaseRepositoryTest {
 
     @Test
     public void testOrderby() {
-        List<Player> result = playerJpaRepository.findAllOrderbyPlayerAndClub();
+        Page<Player> result = playerJpaRepository.findAllOrderbyPlayerAndClub(Mockito.mock(Pageable.class));
 
-        assertThat(result.size(), is(3));
+        assertThat(result.getTotalElements(), is(3L));
     }
 }
