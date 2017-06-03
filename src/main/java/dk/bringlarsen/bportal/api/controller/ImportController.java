@@ -14,6 +14,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import java.util.Collection;
 
 @BasePathAwareController
+@RequestMapping(value = "import")
 public class ImportController {
 
     private ImportService importService;
@@ -24,7 +25,7 @@ public class ImportController {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/import")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public DeferredResult<ResponseEntity<?>> doImport() {
         DeferredResult<ResponseEntity<?>> deferredResult = new DeferredResult<>();
 
