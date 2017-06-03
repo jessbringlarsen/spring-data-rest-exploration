@@ -2,6 +2,7 @@ package dk.bringlarsen.bportal.repository;
 
 import dk.bringlarsen.bportal.model.Club;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -21,7 +22,7 @@ public class ClubJpaRepositoryCustomImpl implements ClubJpaRepositoryCustom {
     @Autowired
     private EntityManager entityManager;
 
-    public List<Club> findByName(String name) throws SQLException {
+    public List<Club> findByName(@Param("name") String name) throws SQLException {
         TypedQuery<Club> query = entityManager.createQuery("select c from club c where c.name = :name", Club.class);
         return query.setParameter("name", name).getResultList();
     }
