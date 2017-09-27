@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        git 'https://github.com/jessbringlarsen/spring-data-rest-exploration.git'
-        sh 'mvn install'
+        checkout scm
       }
     }
   }
