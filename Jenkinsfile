@@ -14,6 +14,7 @@ node {
     junit '**/target/**/TEST*.xml' 
   }
   stage('Analysis') {
+    // Note: BRANCH_NAME variable is only available with multibranch pipelines
     // bat 'mvn sonar:sonar -P Sonar -Dsonar.branch=${BRANCH_NAME} 
   }
   stage('Deploy') {
