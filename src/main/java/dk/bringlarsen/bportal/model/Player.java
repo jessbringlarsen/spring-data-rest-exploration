@@ -9,13 +9,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Player extends AbstractPersistable<Long> {
 
     @Version
-    private Integer version;
+    private Date version;
 
     @NotNull
     @Column
@@ -29,7 +30,7 @@ public class Player extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private List<ClubMembership> clubMemberships;
 
-    public Integer getVersion() {
+    public Date getVersion() {
         return version;
     }
 

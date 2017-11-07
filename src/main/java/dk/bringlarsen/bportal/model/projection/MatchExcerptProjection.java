@@ -1,4 +1,4 @@
-package dk.bringlarsen.bportal.api.projection;
+package dk.bringlarsen.bportal.model.projection;
 
 import dk.bringlarsen.bportal.model.Match;
 import dk.bringlarsen.bportal.model.Player;

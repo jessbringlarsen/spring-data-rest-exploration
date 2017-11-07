@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryConfiguration {
 
     @Bean
-    public PlayerEventHandler personEventHandler() {
-        return new PlayerEventHandler();
+    public PlayerEventHandler personEventHandler() {return new PlayerEventHandler();
     }
 
     @Bean

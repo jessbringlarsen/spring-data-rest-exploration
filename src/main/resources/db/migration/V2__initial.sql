@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS club (
 
 CREATE TABLE IF NOT EXISTS player (
 	id BIGINT AUTO_INCREMENT,
-	version INT,
+	version DATE,
 	name VARCHAR(255) NOT NULL,
   birthdate DATE,
   UNIQUE (name, birthdate)
