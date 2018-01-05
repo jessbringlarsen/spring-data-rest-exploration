@@ -1,0 +1,1 @@
+web: java -jar target/spring-data-rest-exploration-0.0.1-SNAPSHOT.jar
