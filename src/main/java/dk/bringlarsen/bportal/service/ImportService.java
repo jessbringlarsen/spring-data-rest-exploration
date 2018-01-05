@@ -1,9 +1,7 @@
 package dk.bringlarsen.bportal.service;
 
-import org.springframework.util.concurrent.ListenableFuture;
-
-import java.util.Collection;
+import java.io.IOException;
 
 public interface ImportService {
-    ListenableFuture<Collection<String>> doImport();
+    void doImport() throws IOException;
 }

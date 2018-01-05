@@ -5,16 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.async.DeferredResult;
 
-import java.util.Collection;
+import java.io.IOException;
 
 @BasePathAwareController
-@RequestMapping(value = "import")
+@RequestMapping(value = "/")
 public class ImportController {
 
     private ImportService importService;
@@ -25,19 +23,9 @@ public class ImportController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public DeferredResult<ResponseEntity<?>> doImport() {
-        DeferredResult<ResponseEntity<?>> deferredResult = new DeferredResult<>();
-
-        ListenableFuture<Collection<String>> collectionFuture = importService.doImport();
-        collectionFuture.addCallback(
-                success -> deferredResult.setResult(ResponseEntity.ok("request processed ok!")),
-                failure -> {
-                    // Log ex
-                    deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR));
-                });
-
-        // TODO: Return link to status page for import instead
-        return deferredResult;
+    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    public ResponseEntity<?> doImport() throws IOException {
+        importService.doImport();
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

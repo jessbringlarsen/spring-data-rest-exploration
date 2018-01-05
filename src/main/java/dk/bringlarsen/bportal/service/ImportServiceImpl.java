@@ -1,30 +1,49 @@
 package dk.bringlarsen.bportal.service;
 
+import dk.bringlarsen.bportal.model.Player;
+import dk.bringlarsen.bportal.repository.PlayerJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureTask;
+import org.springframework.util.StreamUtils;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ImportServiceImpl implements ImportService {
 
     private Logger logger = LoggerFactory.getLogger(ImportServiceImpl.class);
 
-    @Async
+    @Autowired
+    private PlayerJpaRepository playerJpaRepository;
+
     @Override
-    public ListenableFuture<Collection<String>> doImport() {
-        return new ListenableFutureTask<>(() -> {
-            logger.info("doImport!");
-          /*  DBTURatingServices service = new DBTURatingServices(new DBTURatingServiceProperties());
-            List<Player> players = service.getPlayers();
-            logger.info(String.format("Got %s players", players.size()));
-            */
-            return Collections.emptyList();
-        });
+    public void doImport() throws IOException {
+        List<Player> playerList = parse();
+        playerJpaRepository.save(playerList);
+    }
+
+    private List<Player> parse() throws IOException {
+        List<Player> playerList = new ArrayList<>();
+        try(InputStream is = ImportServiceImpl.class.getClassLoader().getResourceAsStream(("data/PlayerRatingsTableTennisEngland.csv"))) {
+            String content = StreamUtils.copyToString(is, Charset.defaultCharset());
+            String[] lines = content.split("\n");
+            for (String line : lines) {
+                String[] lineSplit = line.split("\"");
+                Player player = new Player();
+                player.setName(lineSplit[1]);
+                playerList.add(player);
+            }
+        }
+        return playerList;
+    }
+
+    public static void main(String[] args) throws IOException {
+
     }
 }
