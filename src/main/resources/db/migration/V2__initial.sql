@@ -1,13 +1,15 @@
 CREATE TABLE IF NOT EXISTS club (
   id BIGINT AUTO_INCREMENT,
-  version INT,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  version INT DEFAULT 1,
   name VARCHAR(255) NOT NULL,
   UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS player (
 	id BIGINT AUTO_INCREMENT,
-	version DATE,
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	version INT DEFAULT 1,
 	name VARCHAR(255) NOT NULL,
   birthdate DATE,
   UNIQUE (name, birthdate)
@@ -15,7 +17,8 @@ CREATE TABLE IF NOT EXISTS player (
 
 CREATE TABLE IF NOT EXISTS club_membership (
 	id BIGINT AUTO_INCREMENT,
-	version INT,
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	version INT DEFAULT 1,
 	player_id INT NOT NULL,
 	club_id INT NOT NULL,
 	member_from DATE NOT NULL,
@@ -27,7 +30,8 @@ CREATE TABLE IF NOT EXISTS club_membership (
 
 CREATE TABLE IF NOT EXISTS match_table (
 	id BIGINT AUTO_INCREMENT,
-	version INT,
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	version INT DEFAULT 1,
 	when_column TIMESTAMP,
 	player1_id INT NOT NULL,
 	player2_id INT NOT NULL,

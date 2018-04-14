@@ -8,15 +8,18 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Player extends AbstractPersistable<Long> {
 
     @Version
-    private Date version;
+    private Integer version;
+
+    @Column
+    private Timestamp created;
 
     @NotNull
     @Column
@@ -30,8 +33,12 @@ public class Player extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private List<ClubMembership> clubMemberships;
 
-    public Date getVersion() {
+    public Integer getVersion() {
         return version;
+    }
+
+    public Timestamp getCreated() {
+        return created;
     }
 
     public String getName() {

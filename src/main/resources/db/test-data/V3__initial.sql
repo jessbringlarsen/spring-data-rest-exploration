@@ -3,12 +3,12 @@ INSERT INTO club (id, name) VALUES(2, 'Brønshøj');
 INSERT INTO club (id, name) VALUES(3, 'Hillerød BTK');
 INSERT INTO club (id, name) VALUES(4, 'Greve BTK');
 
-INSERT INTO player (id, name, version) VALUES(1, 'Jan', CURRENT_DATE);
-INSERT INTO player (id, name, version) VALUES(2, 'Samsonov', CURRENT_DATE);
-INSERT INTO player (id, name, version) VALUES(3, 'Ohh Sang Eun', CURRENT_DATE);
-INSERT INTO player (id, name, version) VALUES(4, 'Maze', CURRENT_DATE);
-INSERT INTO player (id, name, version) VALUES(5, 'Monrad', CURRENT_DATE);
-INSERT INTO player (id, name, version) VALUES(6, 'Applegreen', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(1, 'Jan', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(2, 'Samsonov', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(3, 'Ohh Sang Eun', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(4, 'Maze', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(5, 'Monrad', CURRENT_DATE);
+INSERT INTO player (id, name, birthdate) VALUES(6, 'Applegreen', CURRENT_DATE);
 
 INSERT INTO match_table (id, when_column, player1_id, player2_id) VALUES(1, CURRENT_DATE, 1, 2);
 INSERT INTO match_table (id, when_column, player1_id, player2_id) VALUES(2, CURRENT_DATE, 3, 4);
