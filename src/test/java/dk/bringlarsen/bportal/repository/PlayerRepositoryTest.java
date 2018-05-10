@@ -3,17 +3,21 @@ package dk.bringlarsen.bportal.repository;
 import dk.bringlarsen.bportal.model.Club;
 import dk.bringlarsen.bportal.model.ClubMembership;
 import dk.bringlarsen.bportal.model.Player;
+import dk.bringlarsen.bportal.model.Player_;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -28,6 +32,18 @@ public class PlayerRepositoryTest extends AbstractBaseRepositoryTest {
 
     private static final LocalDate MEMBER_FROM = LocalDate.of(2000, Month.JANUARY, 1);
     private static final LocalDate MEMBER_TO = LocalDate.of(2015, Month.JANUARY, 1);
+
+    @Test
+    public void testNamedEntityGraph() {
+        EntityGraph<Player> entityGraph = entityManager.createEntityGraph(Player.class);
+        entityGraph.addAttributeNodes(Player_.clubMemberships);
+
+        Map hints = new HashMap();
+        hints.put("javax.persistence.fetchgraph", entityGraph);
+
+        Player player = entityManager.find(Player.class, 2L, hints);
+
+    }
 
     @Test
     public void testPersistPlayerWithClub() {
@@ -46,7 +62,7 @@ public class PlayerRepositoryTest extends AbstractBaseRepositoryTest {
         Long id = playerJpaRepository.saveAndFlush(player).getId();
         entityManager.clear();
 
-        List<ClubMembership> clubMemberships = playerJpaRepository.findOne(id).getClubMemberships();
+        List<ClubMembership> clubMemberships = playerJpaRepository.findById(id).get().getClubMemberships();
         ClubMembership membership = clubMemberships.get(0);
 
         assertThat(clubMemberships.size(), is(1));

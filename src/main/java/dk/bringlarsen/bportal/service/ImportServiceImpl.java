@@ -25,7 +25,7 @@ public class ImportServiceImpl implements ImportService {
     @Override
     public void doImport() throws IOException {
         List<Player> playerList = parse();
-        playerJpaRepository.save(playerList);
+        playerJpaRepository.saveAll(playerList);
     }
 
     private List<Player> parse() throws IOException {

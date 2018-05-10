@@ -16,13 +16,15 @@ public class ClubJpaRepositoryTest extends AbstractBaseRepositoryTest {
     @Autowired
     private ClubJpaRepository clubJpaRepository;
 
+
     @Test
     public void testPersistClub() {
         Club club = new Club()
                 .setName("jebla");
         Club saved = clubJpaRepository.saveAndFlush(club);
 
-       assertThat(clubJpaRepository.exists(saved.getId()), is(true));
+        // flush and clean
+       assertThat(clubJpaRepository.getOne(saved.getId()).getId(), is(saved.getId()));
     }
 
     @Test
