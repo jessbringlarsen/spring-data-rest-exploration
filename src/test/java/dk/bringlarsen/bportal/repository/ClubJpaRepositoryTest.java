@@ -4,6 +4,7 @@ import dk.bringlarsen.bportal.model.Club;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,14 +18,17 @@ public class ClubJpaRepositoryTest extends AbstractBaseRepositoryTest {
     private ClubJpaRepository clubJpaRepository;
 
 
+    @Autowired
+    private EntityManager entityManager;
+
+
     @Test
     public void testPersistClub() {
-        Club club = new Club()
-                .setName("jebla");
+        Club club = new Club().setName("jebla");
         Club saved = clubJpaRepository.saveAndFlush(club);
+        entityManager.clear();
 
-        // flush and clean
-       assertThat(clubJpaRepository.getOne(saved.getId()).getId(), is(saved.getId()));
+        assertThat(clubJpaRepository.getOne(saved.getId()).getId(), is(saved.getId()));
     }
 
     @Test

@@ -5,10 +5,9 @@ import dk.bringlarsen.bportal.model.ClubMembership;
 import dk.bringlarsen.bportal.model.Player;
 import dk.bringlarsen.bportal.model.Player_;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -90,7 +89,7 @@ public class PlayerRepositoryTest extends AbstractBaseRepositoryTest {
 
     @Test
     public void testOrderby() {
-        Page<Player> result = playerJpaRepository.findAllOrderbyPlayerAndClub(Mockito.mock(Pageable.class));
+        Page<Player> result = playerJpaRepository.findAllOrderbyPlayerAndClub(PageRequest.of(0, 20));
 
         assertThat(result.getTotalElements(), is(3L));
     }

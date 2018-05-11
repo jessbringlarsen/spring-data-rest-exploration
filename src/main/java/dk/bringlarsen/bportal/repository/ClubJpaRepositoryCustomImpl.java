@@ -19,11 +19,15 @@ import java.util.List;
  */
 public class ClubJpaRepositoryCustomImpl implements ClubJpaRepositoryCustom {
 
-    @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    public ClubJpaRepositoryCustomImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     public List<Club> findByName(@Param("name") String name) throws SQLException {
-        TypedQuery<Club> query = entityManager.createQuery("select c from club c where c.name = :name", Club.class);
+        TypedQuery<Club> query = entityManager.createQuery("select c from Club c where c.name = :name", Club.class);
         return query.setParameter("name", name).getResultList();
     }
 }
